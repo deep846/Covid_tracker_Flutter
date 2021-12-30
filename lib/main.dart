@@ -1,5 +1,6 @@
 import 'package:covid_tracker/Widgets/info_screen.dart';
 import 'package:covid_tracker/constant.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,6 +9,8 @@ import 'package:intl/intl.dart' as dt;
 import 'package:intl/intl.dart';
 import 'Widgets/counter.dart';
 import 'Widgets/my_header.dart';
+import 'package:fl_chart/fl_chart.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -53,30 +56,31 @@ class _HomeScreenState extends State<HomeScreen> {
   var data;
   String countryname = "India";
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     getdata();
   }
+
   //TODO: Change number as M for million as well as for B for Billion
-  void getdata() async{
+  void getdata() async {
     AppBrain ab = new AppBrain(countryname);
     var data = await ab.loaddata();
     setState(() {
-      death=data['deaths'];
+      death = data['deaths'];
       infected = data['cases'];
       recovered = data['recovered'];
       flag = data['countryInfo']['flag'];
       date = DateFormat.yMMMd().format(DateTime.now());
     });
   }
+
+  int touchedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async{
+      onRefresh: () async {
         getdata();
-        setState(() {
-
-        });
+        setState(() {});
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -86,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 image: "assets/icons/Drcorona.svg",
                 textTop: "All you need",
                 textBottom: "is stay at home",
+                visible: false,
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20),
@@ -102,8 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only( right: 16.0),
-                      child: Image.network(flag, width: 50,),
+                      padding: const EdgeInsets.only(right: 16.0),
+                      child: Image.network(
+                        flag,
+                        width: 50,
+                      ),
                     ),
                     Expanded(
                       child: DropdownButton(
@@ -153,18 +161,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Cambodia",
                           "Cameroon",
                           "Canada",
-                          "Cayman Islands (the)",
-                          "Central African Republic (the)",
+                          "Cayman Islands",
+                          "Central African Republic",
                           "Chad",
                           "Chile",
                           "China",
                           "Christmas Island",
-                          "Cocos (Keeling) Islands (the)",
+                          "CocosIslands",
                           "Colombia",
-                          "Comoros (the)",
-                          "Congo (the Democratic Republic of the)",
-                          "Congo (the)",
-                          "Cook Islands (the)",
+                          "Comoros",
+                          "Congo",
+                          "Congo",
+                          "Cook Islands",
                           "Costa Rica",
                           "Croatia",
                           "Cuba",
@@ -175,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Denmark",
                           "Djibouti",
                           "Dominica",
-                          "Dominican Republic (the)",
+                          "Dominican Republic",
                           "Ecuador",
                           "Egypt",
                           "El Salvador",
@@ -184,16 +192,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Estonia",
                           "Eswatini",
                           "Ethiopia",
-                          "Falkland Islands (the) [Malvinas]",
-                          "Faroe Islands (the)",
+                          "Falkland Islands",
+                          "Faroe Islands",
                           "Fiji",
                           "Finland",
                           "France",
                           "French Guiana",
                           "French Polynesia",
-                          "French Southern Territories (the)",
+                          "French Southern Territories",
                           "Gabon",
-                          "Gambia (the)",
+                          "Gambia",
                           "Georgia",
                           "Germany",
                           "Ghana",
@@ -210,14 +218,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Guyana",
                           "Haiti",
                           "Heard Island and McDonald Islands",
-                          "Holy See (the)",
+                          "Holy See",
                           "Honduras",
                           "Hong Kong",
                           "Hungary",
                           "Iceland",
                           "India",
                           "Indonesia",
-                          "Iran (Islamic Republic of)",
+                          "Iran",
                           "Iraq",
                           "Ireland",
                           "Isle of Man",
@@ -230,11 +238,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Kazakhstan",
                           "Kenya",
                           "Kiribati",
-                          "Korea (the Democratic People's Republic of)",
-                          "Korea (the Republic of)",
+                          "Korea",
+                          "Korea",
                           "Kuwait",
                           "Kyrgyzstan",
-                          "Lao People's Democratic Republic (the)",
+                          "Lao People's Democratic Republic",
                           "Latvia",
                           "Lebanon",
                           "Lesotho",
@@ -250,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Maldives",
                           "Mali",
                           "Malta",
-                          "Marshall Islands (the)",
+                          "Marshall Islands",
                           "Martinique",
                           "Mauritania",
                           "Mauritius",
@@ -268,15 +276,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Namibia",
                           "Nauru",
                           "Nepal",
-                          "Netherlands (the)",
+                          "Netherlands",
                           "New Caledonia",
                           "New Zealand",
                           "Nicaragua",
-                          "Niger (the)",
+                          "Niger",
                           "Nigeria",
                           "Niue",
                           "Norfolk Island",
-                          "Northern Mariana Islands (the)",
+                          "Northern Mariana Islands",
                           "Norway",
                           "Oman",
                           "Pakistan",
@@ -286,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Papua New Guinea",
                           "Paraguay",
                           "Peru",
-                          "Philippines (the)",
+                          "Philippines",
                           "Pitcairn",
                           "Poland",
                           "Portugal",
@@ -294,14 +302,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Qatar",
                           "Republic of North Macedonia",
                           "Romania",
-                          "Russian Federation (the)",
+                          "Russian Federation",
                           "Rwanda",
                           "Réunion",
                           "Saint Barthélemy",
                           "Saint Helena, Ascension and Tristan da Cunha",
                           "Saint Kitts and Nevis",
                           "Saint Lucia",
-                          "Saint Martin (French part)",
+                          "Saint Martin",
                           "Saint Pierre and Miquelon",
                           "Saint Vincent and the Grenadines",
                           "Samoa",
@@ -313,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Seychelles",
                           "Sierra Leone",
                           "Singapore",
-                          "Sint Maarten (Dutch part)",
+                          "Sint Maarten",
                           "Slovakia",
                           "Slovenia",
                           "Solomon Islands",
@@ -323,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "South Sudan",
                           "Spain",
                           "Sri Lanka",
-                          "Sudan (the)",
+                          "Sudan",
                           "Suriname",
                           "Svalbard and Jan Mayen",
                           "Sweden",
@@ -341,29 +349,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Tunisia",
                           "Turkey",
                           "Turkmenistan",
-                          "Turks and Caicos Islands (the)",
+                          "Turks and Caicos Islands",
                           "Tuvalu",
                           "Uganda",
                           "Ukraine",
-                          "United Arab Emirates (the)",
-                          "United Kingdom of Great Britain and Northern Ireland (the)",
-                          "United States Minor Outlying Islands (the)",
-                          "United States of America (the)",
+                          "United Arab Emirates",
+                          "United Kingdom of Great Britain and Northern Ireland",
+                          "United States Minor Outlying Islands",
+                          "United States of America",
                           "Uruguay",
                           "Uzbekistan",
                           "Vanuatu",
-                          "Venezuela (Bolivarian Republic of)",
-                          "Viet Nam",
-                          "Virgin Islands (British)",
-                          "Virgin Islands (U.S.)",
-                          "Wallis and Futuna",
+                          "Venezuela",
+                          "Vietnam",
+                          "Virgin Islands",
+                          "Virgin Islands",
                           "Western Sahara",
                           "Yemen",
                           "Zambia",
                           "Zimbabwe",
                           "Åland Islands"
-                        ]
-                            .map<DropdownMenuItem<String>>((String value) {
+                        ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -463,9 +469,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 20),
-                      padding: EdgeInsets.all(20),
-                      height: 178,
+                      margin: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.all(30),
+                      height: 300,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -478,9 +484,57 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ]),
                       //TODO: Add a pi chart here instead of the image on line no 482
-                      child: Image.asset(
-                        "assets/images/map.png",
-                        fit: BoxFit.contain,
+
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: PieChart(
+                              PieChartData(
+                                  pieTouchData: PieTouchData(touchCallback:
+                                      (FlTouchEvent event, pieTouchResponse) {
+                                    setState(() {
+                                      if (!event.isInterestedForInteractions ||
+                                          pieTouchResponse == null ||
+                                          pieTouchResponse.touchedSection ==
+                                              null) {
+                                        touchedIndex = -1;
+                                        return;
+                                      }
+                                      touchedIndex = pieTouchResponse
+                                          .touchedSection!.touchedSectionIndex;
+                                    });
+                                  }),
+                                  borderData: FlBorderData(
+                                    show: false,
+                                  ),
+                                  sectionsSpace: 0,
+                                  centerSpaceRadius: 30,
+                                  sections: showingSections()),
+                            ),
+                          ),
+                          const SizedBox(height: 60.0),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Indicator(
+                                color: const Color(0xFFFF8748),
+                                text: 'Active',
+                                isSquare: false,
+                              ),
+                              Indicator(
+                                color: const Color(0xFFFF4848),
+                                text: 'Deaths',
+                                isSquare: false,
+                              ),
+                              Indicator(
+                                color: const Color(0xFF36C12C),
+                                text: 'Recovered',
+                                isSquare: false,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -490,6 +544,96 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  List<PieChartSectionData> showingSections() {
+    return List.generate(3, (i) {
+      final isTouched = i == touchedIndex;
+      final fontSize = isTouched ? 20.0 : 14.0;
+      final radius = isTouched ? 100.0 : 90.0;
+      switch (i) {
+        case 0:
+          //Death data
+          return PieChartSectionData(
+            color: const Color(0xFFFF4848),
+            value: death.toDouble(),
+            title: 'Death',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 1:
+          // recovered data
+          return PieChartSectionData(
+            color: const Color(0xFF36C12C),
+            value: recovered.toDouble(),
+            title: 'Recovered',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 2:
+          // total cases
+          return PieChartSectionData(
+            color: const Color(0xFFFF8748),
+            value: infected.toDouble(),
+            title: 'Active',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        // case 3:
+        //   return PieChartSectionData(
+        //     color: const Color(0xff13d38e),
+        //     value: 15,
+        //     title: '15%',
+        //     radius: radius,
+        //     titleStyle: TextStyle(
+        //         fontSize: fontSize,
+        //         fontWeight: FontWeight.bold,
+        //         color: const Color(0xffffffff)),
+        //   );
+        default:
+          throw Error();
+      }
+    });
+  }
+}
+
+class Indicator extends StatelessWidget {
+  final Color color;
+  final String text;
+
+  const Indicator({
+    Key? key,
+    required this.color,
+    required this.text,
+    required bool isSquare,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 16.0,
+          width: 16.0,
+          color: color,
+        ),
+        const SizedBox(width: 4.0),
+        Text(
+          text,
+          style: const TextStyle(fontWeight: FontWeight.w500),
+        ),
+      ],
     );
   }
 }
