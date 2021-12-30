@@ -18,7 +18,8 @@ class InfoScreen extends StatelessWidget {
             MyHeader(
                 image: "assets/icons/coronadr.svg",
                 textTop: "Get to know",
-                textBottom: "about Covid-19."),
+                textBottom: "about Covid-19.",
+                visible: true,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -62,12 +63,14 @@ class InfoScreen extends StatelessWidget {
                   PreventCard(
                     image: "assets/images/wear_mask.png",
                     title: "Wear face mask",
-                    text: "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    text:
+                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
                   ),
                   PreventCard(
                     image: "assets/images/wash_hands.png",
                     title: "Wear face mask",
-                    text: "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    text:
+                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
                   ),
                   SizedBox(
                     height: 50.0,

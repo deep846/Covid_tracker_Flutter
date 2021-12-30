@@ -8,12 +8,14 @@ class MyHeader extends StatelessWidget {
   final String image;
   final String textTop;
   final String textBottom;
-  const MyHeader({
-    Key? key,
-    required this.image,
-    required this.textTop,
-    required this.textBottom,
-  }) : super(key: key);
+  final bool visible;
+  const MyHeader(
+      {Key? key,
+      required this.image,
+      required this.textTop,
+      required this.textBottom,
+      required this.visible})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +41,47 @@ class MyHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return InfoScreen();
+            Row(
+              children: [
+                Visibility(
+                  visible: visible,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
                       },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 20.0,
+                      ),
                     ),
-                  );
-                },
-                child: SvgPicture.asset("assets/icons/menu.svg"),
-              ),
+                  ),
+                ),
+                SizedBox(
+                  width: 300,
+                ),
+                Visibility(
+                  visible: !visible,
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return InfoScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: SvgPicture.asset("assets/icons/menu.svg"),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 20,
