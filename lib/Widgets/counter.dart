@@ -42,7 +42,7 @@ class Counter extends StatelessWidget {
         Text(
           "$num",
           style: TextStyle(
-            fontSize: 40,
+            fontSize: 20,
             color: color,
           ),
         ),

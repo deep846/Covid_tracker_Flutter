@@ -14,6 +14,7 @@ class InfoScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            //TODO: change the right corner upper button and make it on right and on pressing it back to the main screen;
             MyHeader(
                 image: "assets/icons/coronadr.svg",
                 textTop: "Get to know",
@@ -61,14 +62,12 @@ class InfoScreen extends StatelessWidget {
                   PreventCard(
                     image: "assets/images/wear_mask.png",
                     title: "Wear face mask",
-                    text:
-                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    text: "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
                   ),
                   PreventCard(
                     image: "assets/images/wash_hands.png",
                     title: "Wear face mask",
-                    text:
-                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    text: "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
                   ),
                   SizedBox(
                     height: 50.0,
@@ -123,8 +122,7 @@ class PreventCard extends StatelessWidget {
               left: 130,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                height:
-                    MediaQuery.of(context).size.height - 725, //Different height
+                height: 140, //Different height
                 width: MediaQuery.of(context).size.width - 170,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
