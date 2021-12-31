@@ -9,76 +9,78 @@ class InfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //TODO: change the right corner upper button and make it on right and on pressing it back to the main screen;
-            MyHeader(
-                image: "assets/icons/coronadr.svg",
-                textTop: "Get to know",
-                textBottom: "about Covid-19.",
-                visible: true,),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Symptoms",
-                    style: kTitleTextstyle,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      SymptomsCard(
-                        image: "assets/images/headache.png",
-                        title: "Headache",
-                        isActive: true,
-                      ),
-                      SymptomsCard(
-                        image: "assets/images/caugh.png",
-                        title: "Caugh",
-                      ),
-                      SymptomsCard(
-                        image: "assets/images/fever.png",
-                        title: "Fever",
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    "Prevention",
-                    style: kTitleTextstyle,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  PreventCard(
-                    image: "assets/images/wear_mask.png",
-                    title: "Wear face mask",
-                    text:
-                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
-                  ),
-                  PreventCard(
-                    image: "assets/images/wash_hands.png",
-                    title: "Wear face mask",
-                    text:
-                        "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  )
-                ],
-              ),
-            )
-          ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              //TODO: change the right corner upper button and make it on right and on pressing it back to the main screen;
+              MyHeader(
+                  image: "assets/icons/coronadr.svg",
+                  textTop: "Get to know",
+                  textBottom: "about Covid-19.",
+                  visible: true,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Symptoms",
+                      style: kTitleTextstyle,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        SymptomsCard(
+                          image: "assets/images/headache.png",
+                          title: "Headache",
+                          isActive: true,
+                        ),
+                        SymptomsCard(
+                          image: "assets/images/caugh.png",
+                          title: "Caugh",
+                        ),
+                        SymptomsCard(
+                          image: "assets/images/fever.png",
+                          title: "Fever",
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      "Prevention",
+                      style: kTitleTextstyle,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    PreventCard(
+                      image: "assets/images/wear_mask.png",
+                      title: "Wear face mask",
+                      text:
+                          "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    ),
+                    PreventCard(
+                      image: "assets/images/wash_hands.png",
+                      title: "Wear face mask",
+                      text:
+                          "Since the start of the corona virus outbreak some places have embraced wearing facemask,",
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
